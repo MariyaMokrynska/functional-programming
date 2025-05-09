@@ -3,14 +3,16 @@
 # one. (assume no ties)
 
 def shortest_word(words):
-    pass
+    return min(words, key=lambda word: len(word))
 
 # SUPER CHALLENGE: use functools.reduce
 # Only try this after completing the rest of the activity
 # You will need to research the use of the functools.reduce function
-# def shortest_word(words):
-#     from functools import reduce
-#     pass    
+
+
+def shortest_word(words):
+    from functools import reduce
+    return reduce(lambda shortest, current: current if len(current) < len(shortest) else shortest, words)
 
 
 # Wave 2
@@ -19,7 +21,9 @@ def shortest_word(words):
 # Hint: remember to convert back to a list!
 
 def even_nums(nums):
-    pass
+    return list(filter(lambda x: x % 2 == 0, nums))
+    # return [num for num in nums if num % 2 ==0]
+
 
 # Wave 3
 # Write a function that takes in a list of numbers and returns a new list
@@ -27,21 +31,25 @@ def even_nums(nums):
 # Hint: remember to convert back to a list!
 
 def squares(nums):
-    pass
+    return list(map(lambda num: num ** 2, nums))
 
 # Wave 4
-# Write a function that accepts a word, a function, and the name of that 
+# Write a function that accepts a word, a function, and the name of that
 # function. It should return a string that reports:
 # "The result of applying FUNCTION_NAME to WORD is RESULT"
 
+
 def report(word, function, function_name):
-    pass
+    result = function(word)
+    return f"The result of applying {function_name} to {word} is {result}"
 
 # Wave 5
-# Write a function that takes a list of passwords and returns a list of only 
-# those passwords that have at least one non-alphabetic character in them. 
+# Write a function that takes a list of passwords and returns a list of only
+# those passwords that have at least one non-alphabetic character in them.
 # The returned list should be sorted by in order of increasing length.
 
-def sorted_valid_passwords(passwords):
-    pass
 
+def sorted_valid_passwords(passwords):
+    valid = filter(lambda pw: not pw.isalpha(), passwords)
+    return sorted(valid, key=len)
+    # return sorted(valid, key=lambda pw: len(pw))
